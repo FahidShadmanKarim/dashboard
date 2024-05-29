@@ -112,7 +112,7 @@ def display_statistics(df):
     st.write(f"Max Value: {max_value} (Recorded on {max_day_str}, {max_date_str})")
     st.write(f"Min Value: {min_value} (Recorded on {min_day_str}, {min_date_str})")
 
-def display_line_chart(df, title,plot_height = 800,plot_width = 400):
+def display_line_chart(df, title,plot_height = 800,plot_width = 1800):
     st.subheader("Line Chart")
     fig = px.line(df, x='created_at', y='value', title=title)
 
