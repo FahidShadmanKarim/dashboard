@@ -62,7 +62,7 @@ def display_data(data, start_date_selected, end_date_selected):
     df = pd.DataFrame(data)
     df['created_at'] = pd.to_datetime(df['created_at']).dt.tz_convert('UTC')
     filtered_df = df[(df['created_at'] >= start_date_selected) & (df['created_at'] <= end_date_selected)]
-    st.write(filtered_df)
+    st.dataframe(filtered_df,width = 1800)
     display_statistics(filtered_df)
     display_line_chart(filtered_df, "Sensor Data",plot_height=800, plot_width=1800)
 
@@ -76,7 +76,6 @@ def display_both_data(temp_data, hum_data, start_date_selected, end_date_selecte
     filtered_temp_df = temp_df[(temp_df['created_at'] >= start_date_selected) & (temp_df['created_at'] <= end_date_selected)]
     filtered_hum_df = hum_df[(hum_df['created_at'] >= start_date_selected) & (hum_df['created_at'] <= end_date_selected)]
 
-
     
     st.subheader("Temperature Data")
     st.dataframe(filtered_temp_df,width=1800)
@@ -86,9 +85,7 @@ def display_both_data(temp_data, hum_data, start_date_selected, end_date_selecte
     # Add spacing
     st.write("")
     st.write("")
-    st.write("")
-
-    
+   
     st.subheader("Humidity Data")
     st.dataframe(filtered_hum_df,width=1800)
     display_statistics(filtered_hum_df)
