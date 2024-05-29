@@ -11,6 +11,8 @@ from utils import date_to_int, int_to_date
 
 def main():
 
+    st.set_page_config(layout="wide")
+
 
     st.title("Sensor Data Visualization")
     sensor_id = st.selectbox("Select Sensor ID", ["151", "152"])
@@ -80,13 +82,18 @@ def display_both_data(temp_data, hum_data, start_date_selected, end_date_selecte
         st.subheader("Temperature Data")
         st.write(filtered_temp_df)
         display_statistics(filtered_temp_df)
-        display_line_chart(filtered_temp_df, "Temperature Data")
+        display_line_chart(filtered_temp_df, "Temperature Data", plot_height=800, plot_width=600)
+
+    # Add spacing
+    st.write("")
+    st.write("")
+    st.write("")
 
     with col2:
         st.subheader("Humidity Data")
         st.write(filtered_hum_df)
         display_statistics(filtered_hum_df)
-        display_line_chart(filtered_hum_df, "Humidity Data")
+        display_line_chart(filtered_hum_df, "Humidity Data", plot_height=800, plot_width=600)
 
 def display_statistics(df):
 
@@ -106,9 +113,11 @@ def display_statistics(df):
     st.write(f"Max Value: {max_value} (Recorded on {max_day_str}, {max_date_str})")
     st.write(f"Min Value: {min_value} (Recorded on {min_day_str}, {min_date_str})")
 
-def display_line_chart(df, title):
+def display_line_chart(df, title,plot_height = 800,plot_width = 400):
     st.subheader("Line Chart")
     fig = px.line(df, x='created_at', y='value', title=title)
+
+    fig.update_layout(height=plot_height, width=plot_width)
 
     max_value = df['value'].max()
     min_value = df['value'].min()
